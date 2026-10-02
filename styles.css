@@ -1,0 +1,371 @@
+/* Shared values keep the visual system consistent. */
+:root {
+  --background:#f7f7f7;
+  --ink:#161616;
+  --muted:#535353;
+  --line:#d2d2d2;
+  --accent:#a64b35;
+  --heading:'Barlow Condensed',Impact,sans-serif;
+}
+
+* {
+  box-sizing:border-box;
+}
+
+html {
+  scroll-behavior:smooth;
+  scroll-padding-top:24px;
+}
+
+body {
+  margin:0;
+  background:var(--background);
+  color:var(--ink);
+  font-family:Georgia,'Source Serif 4',serif;
+  font-size:18px;
+  line-height:1.55;
+}
+
+a {
+  color:inherit;
+  text-underline-offset:4px;
+}
+
+a:hover {
+  color:var(--accent);
+}
+
+button {
+  font:inherit;
+}
+
+a:focus-visible,button:focus-visible {
+  outline:3px solid var(--accent);
+  outline-offset:5px;
+}
+
+.skip {
+  position:fixed;
+  top:-100px;
+  left:20px;
+  background:white;
+  padding:15px;
+  z-index:10;
+}
+
+.skip:focus {
+  top:15px;
+}
+
+.topbar,main {
+  max-width:1440px;
+  margin:auto;
+  padding-left:6%;
+  padding-right:6%;
+}
+
+.topbar {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding-top:25px;
+  padding-bottom:25px;
+  border-bottom:1px solid var(--line);
+}
+
+.brand {
+  font-family:var(--heading);
+  font-size:32px;
+  font-weight:700;
+  text-decoration:none;
+}
+
+.topbar nav {
+  display:flex;
+  gap:32px;
+}
+
+.topbar nav a {
+  text-decoration:none;
+  font-size:18px;
+}
+
+h1,h2,h3 {
+  font-family:var(--heading);
+  font-weight:600;
+  line-height:1.05;
+}
+
+.intro {
+  padding:55px 0 45px;
+  border-bottom:1px solid var(--ink);
+}
+
+h1 {
+  font-size:clamp(64px,9vw,128px);
+  letter-spacing:-1.5px;
+  margin:0 0 30px;
+}
+
+.intro-bottom {
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:30px;
+}
+
+.intro-bottom p {
+  max-width:650px;
+  margin:0;
+  font-size:22px;
+}
+
+.collection {
+  padding-top:64px;
+}
+
+.section-head {
+  display:flex;
+  justify-content:space-between;
+  align-items:end;
+  gap:25px;
+  margin-bottom:28px;
+}
+
+.section-head h2 {
+  font-size:48px;
+  margin:0;
+}
+
+.project-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  column-gap:30px;
+  row-gap:40px;
+}
+
+.project-card {
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  padding:0 0 24px;
+  border-bottom:1px solid var(--line);
+}
+
+.card-top {
+  color:var(--muted);
+  font-size:16px;
+  overflow-wrap:anywhere;
+}
+
+.project-card h3 {
+  font-size:35px;
+  margin:10px 0 12px;
+  overflow-wrap:anywhere;
+}
+
+.project-card p {
+  font-size:18px;
+  color:var(--muted);
+  margin:0 0 25px;
+  overflow-wrap:anywhere;
+}
+
+.card-bottom {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-top:auto;
+  font-size:16px;
+}
+
+.card-bottom a {
+  color:var(--accent);
+}
+
+.pending {
+  color:var(--muted);
+  font-size:16px;
+}
+
+.library {
+  padding:64px 0 30px;
+}
+
+/* A shelf is a row of buttons, aligned along their bottom edge. */
+.shelf {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  padding: 24px 8px 0;
+  overflow-x: auto;
+  border-bottom: 3px solid var(--ink);
+}
+
+/* One subtle binding line gives each spine a little depth. */
+.book {
+  flex: 0 0 82px;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 12px 14px;
+  border: 0;
+  border-left: 3px solid #ffffff30;
+  border-radius: 2px 2px 0 0;
+  background: var(--book-color);
+  box-shadow: inset -3px 0 #00000015;
+  color: white;
+  cursor: pointer;
+  transition: filter .2s, box-shadow .2s;
+}
+
+.book:nth-child(3n + 2) {
+  height: 298px;
+}
+
+.book:nth-child(3n) {
+  height: 264px;
+}
+
+.book:hover,
+.book[aria-pressed="true"] {
+  filter: brightness(1.1);
+  box-shadow: inset 0 -5px #ffffff80, inset -3px 0 #00000015;
+}
+
+.book:focus-visible {
+  outline-offset: -6px;
+  outline-color: white;
+}
+
+.book-title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  max-height: 218px;
+  font-family: var(--heading);
+  font-size: 22px;
+  line-height: 1.15;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.book-imprint {
+  width: 100%;
+  padding-top: 8px;
+  border-top: 1px solid #ffffff50;
+  font-size: 15px;
+  text-align: center;
+}
+
+.book-detail {
+  padding:28px 0;
+  min-height:160px;
+  display:grid;
+  grid-template-columns:1fr 2fr;
+  gap:25px;
+}
+
+.eyebrow {
+  font-size:16px;
+  color:var(--muted);
+}
+
+.book-detail h3 {
+  font-size:32px;
+  margin:0 0 10px;
+}
+
+.book-detail p {
+  margin:0 0 8px;
+  font-size:18px;
+}
+
+.book-detail a {
+  color:var(--accent);
+}
+
+@media(max-width:1000px) {
+  .project-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+}
+
+@media(max-width:640px) {
+  .topbar {
+    align-items:start;
+    gap:15px;
+  }
+
+  .topbar nav {
+    flex-wrap:wrap;
+    justify-content:end;
+    gap:8px 18px;
+  }
+
+  .topbar nav a {
+    font-size:16px;
+  }
+
+  h1 {
+    font-size:68px;
+  }
+
+  .intro {
+    padding-top:35px;
+  }
+
+  .intro-bottom p {
+    font-size:20px;
+  }
+
+  .section-head {
+    display:block;
+  }
+
+  .section-head h2 {
+    font-size:40px;
+    margin-bottom:15px;
+  }
+
+  .project-grid {
+    grid-template-columns:1fr;
+  }
+
+  .book-detail {
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+}
+
+@media(prefers-reduced-motion:reduce) {
+  html {
+    scroll-behavior:auto;
+  }
+
+  *,*::before,*::after {
+    transition:none!important;
+    animation:none!important;
+  }
+
+}
+
+/* Every card reserves the same landscape image area, even before an image exists. */
+.project-image {
+  aspect-ratio:16 / 10;
+  overflow:hidden;
+  background:#e9e7e4;
+  margin-bottom:20px;
+}
+
+.project-image img {
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}

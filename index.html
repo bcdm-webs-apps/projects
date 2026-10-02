@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BCDM Webs and Apps</title>
+  <meta name="description" content="Websites, apps and interactive experiences by BCDM students.">
+  <meta name="theme-color" content="#f7f7f7">
+  <meta property="og:title" content="BCDM Webs and Apps">
+  <meta property="og:description" content="Websites, apps and interactive experiences by BCDM students.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23a64b35' d='M0 0h64v64H0z'/%3E%3Ctext x='12' y='48' fill='white' font-family='Arial' font-weight='bold' font-size='44'%3EB%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&amp;family=Source+Serif+4:wght@400&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Data loads first; app.js turns that data into cards. -->
+  <script src="data.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#individual">Skip to projects</a>
+  <header class="topbar">
+    <a class="brand" href="#">BCDM</a>
+    <nav aria-label="Main navigation">
+      <a href="#individual">Individual</a>
+      <a href="#teams">Teams</a>
+      <a href="#bibliography">Bookshelf</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="site-title">
+      <h1 id="site-title">BCDM<br>Webs and Apps</h1>
+      <div class="intro-bottom">
+        <p>A collection of digital experiences made in class. From first sketches to working websites, this is where our ideas meet the web.</p>
+      </div>
+    </section>
+
+    <section id="individual" class="collection" aria-labelledby="individual-title">
+      <div class="section-head"><h2 id="individual-title">Individual projects</h2></div>
+      <div class="project-grid" id="individual-grid"></div>
+    </section>
+
+    <section id="teams" class="collection" aria-labelledby="team-title">
+      <div class="section-head"><h2 id="team-title">Team projects</h2></div>
+      <div class="project-grid" id="team-grid"></div>
+    </section>
+
+    <section id="bibliography" class="library" aria-labelledby="library-title">
+      <div class="section-head"><h2 id="library-title">Bibliography</h2></div>
+      <div class="shelf" id="bookshelf"></div>
+      <div class="book-detail" id="book-detail" aria-live="polite"></div>
+    </section>
+    <noscript><p>Enable JavaScript to see the projects and books.</p></noscript>
+  </main>
+</body>
+</html>
