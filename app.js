@@ -50,10 +50,25 @@ function renderProjects(rows, gridId) {
     const bottom = element("div", "card-bottom");
     const url = safeURL(project.url);
     if (url) {
-      const link = externalLink("View project ↗", url);
+      const link = externalLink("View project", url);
       link.setAttribute("aria-label", `View ${title} (opens in a new tab)`); bottom.append(link);
     } else bottom.append(element("span", "pending", "Coming soon"));
+    const github = safeURL(project.github_url);
+    if (github) {
+      const link = externalLink("GitHub", github);
+      link.setAttribute("aria-label", `GitHub repository for ${title} (opens in a new tab)`);
+      bottom.append(link);
+    }
     card.append(projectImage(project, title), top, element("h3", "", title), element("p", "", project.description || ""), bottom);
+    if (/^\d{4}-\d{2}-\d{2}$/.test(project.presentation_date || "")) {
+      const date = new Date(`${project.presentation_date}T12:00:00Z`);
+      if (!Number.isNaN(date.getTime())) {
+        const label = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(date);
+        const time = element("time", "presentation-date", `Presenting ${label}`);
+        time.dateTime = project.presentation_date;
+        card.append(time);
+      }
+    }
     grid.append(card);
   });
 }

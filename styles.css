@@ -190,6 +190,13 @@ h1 {
   font-size:16px;
 }
 
+.presentation-date {
+  display:block;
+  margin-top:14px;
+  color:var(--muted);
+  font-size:16px;
+}
+
 .library {
   padding:64px 0 30px;
 }
@@ -357,7 +364,7 @@ h1 {
 
 /* Every card reserves the same landscape image area, even before an image exists. */
 .project-image {
-  aspect-ratio:16 / 10;
+  aspect-ratio:16 / 9;
   overflow:hidden;
   background:#e9e7e4;
   margin-bottom:20px;
@@ -367,5 +374,5 @@ h1 {
   display:block;
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
 }
