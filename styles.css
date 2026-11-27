@@ -144,6 +144,16 @@ h1 {
   row-gap:40px;
 }
 
+.date-navigation { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:36px; }
+.date-navigation a { padding:10px 16px; border:1px solid var(--line); font-size:16px; text-decoration:none; }
+.date-navigation a:hover { border-color:var(--accent); }
+.presentation-group { margin-bottom:60px; }
+.date-heading { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:12px; border-top:3px solid var(--accent); padding-top:18px; margin-bottom:28px; }
+.date-heading h3 { font-size:36px; margin:0; }
+.date-heading span { color:var(--muted); font-size:16px; }
+#presentations-2026-12-04 .date-heading { border-color:#3b6974; }
+#other-projects .date-heading { border-color:var(--line); }
+
 .project-card {
   min-width:0;
   display:flex;
@@ -186,6 +196,13 @@ h1 {
 }
 
 .pending {
+  color:var(--muted);
+  font-size:16px;
+}
+
+.presentation-date {
+  display:block;
+  margin-top:14px;
   color:var(--muted);
   font-size:16px;
 }
@@ -357,7 +374,7 @@ h1 {
 
 /* Every card reserves the same landscape image area, even before an image exists. */
 .project-image {
-  aspect-ratio:16 / 10;
+  aspect-ratio:16 / 9;
   overflow:hidden;
   background:#e9e7e4;
   margin-bottom:20px;
@@ -367,5 +384,5 @@ h1 {
   display:block;
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
 }

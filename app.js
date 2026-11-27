@@ -50,10 +50,25 @@ function renderProjects(rows, gridId) {
     const bottom = element("div", "card-bottom");
     const url = safeURL(project.url);
     if (url) {
-      const link = externalLink("View project ↗", url);
+      const link = externalLink("View project", url);
       link.setAttribute("aria-label", `View ${title} (opens in a new tab)`); bottom.append(link);
     } else bottom.append(element("span", "pending", "Coming soon"));
+    const github = safeURL(project.github_url);
+    if (github) {
+      const link = externalLink("GitHub", github);
+      link.setAttribute("aria-label", `GitHub repository for ${title} (opens in a new tab)`);
+      bottom.append(link);
+    }
     card.append(projectImage(project, title), top, element("h3", "", title), element("p", "", project.description || ""), bottom);
+    if (/^\d{4}-\d{2}-\d{2}$/.test(project.presentation_date || "")) {
+      const date = new Date(`${project.presentation_date}T12:00:00Z`);
+      if (!Number.isNaN(date.getTime())) {
+        const label = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(date);
+        const time = element("time", "presentation-date", `Presenting ${label}`);
+        time.dateTime = project.presentation_date;
+        card.append(time);
+      }
+    }
     grid.append(card);
   });
 }
@@ -82,6 +97,34 @@ function renderBooks(rows) {
   shelf.querySelector("button")?.click();
 }
 // Read data.js and draw the three sections. No server or network requests.
-renderProjects(data.individual, "individual-grid");
+function renderIndividualProjects(rows) {
+  const container = document.getElementById("individual-grid");
+  const navigation = document.getElementById("date-navigation");
+  container.replaceChildren();
+  navigation.replaceChildren();
+  const dates = [...new Set(rows.map(p => p.presentation_date).filter(Boolean))].sort();
+  if (rows.some(p => !p.presentation_date)) dates.push("");
+  dates.forEach(date => {
+    const projects = rows.filter(p => (p.presentation_date || "") === date);
+    const id = date ? `presentations-${date}` : "other-projects";
+    const label = date ? new Intl.DateTimeFormat("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${date}T12:00:00Z`)) : "Date not assigned";
+    const jump = element("a", "", `${label} · ${projects.length}`);
+    jump.href = `#${id}`;
+    navigation.append(jump);
+    const section = element("section", "presentation-group");
+    section.id = id;
+    section.setAttribute("aria-labelledby", `${id}-title`);
+    const heading = element("h3", "", label);
+    heading.id = `${id}-title`;
+    const header = element("div", "date-heading");
+    header.append(heading, element("span", "", `${projects.length} ${date ? "students" : "project"}`));
+    const grid = element("div", "project-grid");
+    grid.id = `${id}-grid`;
+    section.append(header, grid);
+    container.append(section);
+    renderProjects(projects, grid.id);
+  });
+}
+renderIndividualProjects(data.individual);
 renderProjects(data.teams, "team-grid");
 renderBooks(data.books);
